@@ -1,0 +1,27 @@
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "lab-python-rust"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    'click',
+    # https://github.com/un33k/python-slugify
+    'python-slugify',
+]
+dynamic = ["version"]
+
+[project.scripts]
+py-cli = "lab_python_rust.cli:my_cli"
+
+# https://www.maturin.rs/config
+[tool.maturin]
+python-source = "python"
+module-name = "lab_python_rust._lab_python_rust"
+features = ["pyo3/extension-module"]
