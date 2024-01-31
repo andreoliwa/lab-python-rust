@@ -17,11 +17,7 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-[project.scripts]
-py-cli = "lab_python_rust.cli:my_cli"
-
 # https://www.maturin.rs/config
 [tool.maturin]
 python-source = "python"
 module-name = "lab_python_rust._lab_python_rust"
-features = ["pyo3/extension-module"]

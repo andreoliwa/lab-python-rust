@@ -70,3 +70,6 @@ docs/_build/
 
 # Pyenv
 .python-version
+
+# This file will be created by make targets, dependending on the chosen entry point
+pyproject.toml

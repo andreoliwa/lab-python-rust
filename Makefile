@@ -12,6 +12,10 @@ develop: # Install the crate as module in the current virtualenv, rehash pyenv t
 	pyenv rehash
 .PHONY: develop
 
+print-config: # Print the configuration used by maturin
+	PYO3_PRINT_CONFIG=1 maturin develop
+.PHONY: print-config
+
 install: # Create the virtualenv
 	pyenv virtualenv lab-python-rust
 	pyenv local lab-python-rust
@@ -29,6 +33,14 @@ example: develop # Run a simple example of Python code calling Rust code
 	python -c "from lab_python_rust import _lab_python_rust as rust; print(rust.sum_as_string(5, 20)); print(rust.hello('John Doe'))"
 .PHONY: example
 
-cli: develop # Run the Python CLI script
-	py-cli slug 'John Doe'
-.PHONY: cli
+cli-py: # Run the CLI with a Python click script as the entry point
+	cat pyproject-base.toml pyproject-python-cli.toml > pyproject.toml
+	$(MAKE) develop
+	lab-cli-py slug 'John Doe'
+.PHONY: cli-py
+
+cli-rs: develop # Run the CLI with a Rust bin as the entry point
+	cat pyproject-base.toml pyproject-rust-cli.toml > pyproject.toml
+	$(MAKE) develop
+	lab-cli-rs slug-rust 'John Doe Mary Jane Harry Callahan'
+.PHONY: cli-rs
