@@ -24,6 +24,16 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn slug_rust(name: String) -> Result<(), Box<dyn Error>> {
+    // Initialize Python to avoid this error message:
+    // thread 'main' panicked at /Users/aa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/pyo3-0.20.2/src/gil.rs:199:21:
+    // assertion `left != right` failed: The Python interpreter is not initialized and the `auto-initialize` feature is not enabled.
+    //
+    // Consider calling `pyo3::prepare_freethreaded_python()` before attempting to use Python APIs.
+    //   left: 0
+    //  right: 0
+    // note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+    pyo3::prepare_freethreaded_python();
+
     Python::with_gil(|py| {
         let module = PyModule::import(py, "lab_python_rust")?;
         let rv: i32 = module.getattr("python_func_no_args")?.call0()?.extract()?;
