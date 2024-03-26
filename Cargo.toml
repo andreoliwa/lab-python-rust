@@ -13,5 +13,5 @@ name = "lab-cli-rs"
 path = "src/main.rs"
 
 [dependencies]
-pyo3 = { version =  "0.20.2"}
+pyo3 = { version =  "0.21.0"}
 clap = {features = ["derive"], version = "4.4.18"}
