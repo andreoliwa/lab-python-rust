@@ -113,7 +113,7 @@ jobs:
     if: "startsWith(github.ref, 'refs/tags/')"
     needs: [linux, sdist] # TODO: , windows, macos
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: wheels
       - name: Publish to PyPI
