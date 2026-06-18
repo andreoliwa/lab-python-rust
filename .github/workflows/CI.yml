@@ -25,7 +25,7 @@ jobs:
       matrix:
         target: [x86_64] # TODO:, x86, aarch64, armv7, s390x, ppc64le]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Create pyproject.toml for Python extension
         run: cat pyproject-base.toml pyproject-python-cli.toml > pyproject.toml
       - uses: actions/setup-python@v5
@@ -93,7 +93,7 @@ jobs:
   sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Create pyproject.toml for Python extension
         run: cat pyproject-base.toml pyproject-python-cli.toml > pyproject.toml
       - name: Build sdist
